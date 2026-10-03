@@ -1,45 +1,30 @@
-// import { foodData } from "./foodData";
+export function addExpirationInfo(item: any) {
+  const today = new Date();
 
-// export function calculateExpiration(
-//   foodName: string,
-//   purchaseDate: Date = new Date()
-// ) {
-//   const normalizedName = foodName.toLowerCase();
+  const expirationDate = new Date(today);
 
-//   const shelfLife = foodData[normalizedName] ?? 7;
+  expirationDate.setDate(
+    expirationDate.getDate() + item.estShelfDays
+  );
 
-//   const expirationDate = new Date(purchaseDate);
+  let status: "use_today" | "use_soon" | "good";
 
-//   expirationDate.setDate(
-//     expirationDate.getDate() + shelfLife
-//   );
+  if (item.estShelfDays <= 1) {
+    status = "use_today";
+  } else if (item.estShelfDays <= 3) {
+    status = "use_soon";
+  } else {
+    status = "good";
+  }
 
-//   const today = new Date();
+  return {
+    ...item,
 
-//   const millisecondsLeft =
-//     expirationDate.getTime() - today.getTime();
+    daysLeft: item.estShelfDays,
 
-//   const daysLeft = Math.ceil(
-//     millisecondsLeft / (1000 * 60 * 60 * 24)
-//   );
+    estimatedExpiration:
+      expirationDate.toISOString().split("T")[0],
 
-//   let status;
-
-//   if (daysLeft <= 0) {
-//     status = "expired";
-//   } else if (daysLeft <= 1) {
-//     status = "use_today";
-//   } else if (daysLeft <= 3) {
-//     status = "use_soon";
-//   } else {
-//     status = "good";
-//   }
-
-//   return {
-//     foodName,
-//     shelfLife,
-//     expirationDate,
-//     daysLeft,
-//     status,
-//   };
-// }
+    status,
+  };
+}
