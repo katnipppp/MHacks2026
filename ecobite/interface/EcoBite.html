@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>EcoBite</title>
+
+  <style>
+    :root {
+      --cream: #fdfbf6;
+      --cream-dim: #f7f4ec;
+      --ink: #263746;
+      --ink-soft: #29495c;
+      --teal: #3e7085;
+      --teal-dark: #29495c;
+      --teal-pale: #dceef1;
+      --teal-paler: #eaf5f6;
+      --sand: #e6d7bd;
+      --sand-pale: #f3eee3;
+      --sand-paler: #f5f1e8;
+      --muted: #8299a2;
+      --muted-dim: #91a0a5;
+      --line: #ece8df;
+      --danger: #b85c4a;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      background: var(--cream-dim);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    button, input, select {
+      font-family: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    .nav-item:focus-visible,
+    .tab:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    /* ---------- APP ---------- */
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 90px;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .header {
+      padding: 28px 24px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 22px;
+      font-weight: 750;
+      color: var(--ink-soft);
+    }
+
+    .logo-leaf {
+      width: 30px;
+      height: 30px;
+      background: #b8dce4;
+      border-radius: 18px 4px 18px 4px;
+      transform: rotate(-25deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      position: relative;
+      transition: transform 0.15s ease;
+    }
+
+    .profile:hover {
+      transform: translateY(-1px);
+    }
+
+    .profile:active {
+      transform: scale(0.94);
+    }
+
+    .profile-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--sand);
+      color: #53616a;
+      font-weight: 700;
+      font-size: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 2px var(--cream);
+      transition: box-shadow 0.15s ease;
+    }
+
+    .profile:hover .profile-inner {
+      box-shadow: 0 0 0 2px var(--teal-pale);
+    }
+
+    .profile-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--cream);
+      transition: transform 0.15s ease;
+    }
+
+    .profile:hover .profile-badge {
+      transform: scale(1.15);
+    }
+
+    /* ---------- TABS ---------- */
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      padding: 0 24px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      border: none;
+      padding: 11px 19px;
+      border-radius: 24px;
+      background: transparent;
+      color: var(--muted-dim);
+      font-size: 14px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .tab.active {
+      background: var(--teal-pale);
+      color: #31566a;
+    }
+
+    /* ---------- PAGES ---------- */
+
+    .page {
+      display: none;
+      padding: 0 24px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- CAMERA PAGE ---------- */
+
+    .intro {
+      margin-bottom: 22px;
+    }
+
+    .intro h1 {
+      font-size: 29px;
+      line-height: 1.15;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      letter-spacing: -0.7px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted-dim);
+      max-width: 330px;
+    }
+
+    .camera-card {
+      height: 310px;
+      border-radius: var(--radius-lg);
+      background: var(--teal-paler);
+      border: 1.5px dashed #a8ccd3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .camera-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #c8e5e9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .camera-card h2 {
+      font-size: 18px;
+      color: #385b6c;
+      margin-bottom: 7px;
+    }
+
+    .camera-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .scan-button {
+      border: none;
+      background: var(--teal);
+      color: white;
+      padding: 13px 24px;
+      border-radius: 22px;
+      font-weight: 650;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(62, 112, 133, 0.18);
+      transition: 0.2s ease;
+    }
+
+    .scan-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ---------- FOOD STATUS ---------- */
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 28px 0 13px;
+    }
+
+    .section-title h2 {
+      font-size: 17px;
+      color: #385463;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: var(--muted-dim);
+    }
+
+    .food-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .food-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .food {
+      min-width: 112px;
+      padding: 15px;
+      border-radius: 18px;
+      background: var(--sand-pale);
+    }
+
+    .food-icon {
+      font-size: 25px;
+      margin-bottom: 9px;
+    }
+
+    .food-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #465862;
+      margin-bottom: 5px;
+    }
+
+    .food-expiry {
+      font-size: 11px;
+      color: #a27f63;
+    }
+
+    /* ---------- RECIPES ---------- */
+
+    .recipe-heading {
+      margin-bottom: 20px;
+    }
+
+    .recipe-heading h1 {
+      font-size: 29px;
+      color: var(--ink-soft);
+      letter-spacing: -0.7px;
+      margin-bottom: 7px;
+    }
+
+    .recipe-heading p {
+      font-size: 14px;
+      color: var(--muted-dim);
+      line-height: 1.5;
+    }
+
+    .rescue-banner {
+      background: var(--teal-pale);
+      border-radius: var(--radius-md);
+      padding: 17px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rescue-icon {
+      font-size: 26px;
+    }
+
+    .rescue-banner strong {
+      display: block;
+      color: #35596b;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .rescue-banner span {
+      color: #708993;
+      font-size: 12px;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(54, 76, 86, 0.07);
+      border: 1px solid var(--line);
+    }
+
+    .recipe-image {
+      height: 145px;
+      background: linear-gradient(135deg, #dcebed, #efe5d2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 62px;
+    }
+
+    .recipe-content {
+      padding: 18px;
+    }
+
+    .recipe-tag {
+      display: inline-block;
+      background: #edf4e8;
+      color: #69815d;
+      padding: 5px 9px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .recipe-content h2 {
+      font-size: 19px;
+      color: #354e5b;
+      margin-bottom: 6px;
+    }
+
+    .recipe-description {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+
+    .ingredient {
+      background: var(--sand-paler);
+      padding: 6px 9px;
+      border-radius: 10px;
+      font-size: 11px;
+      color: #66736f;
+    }
+
+    .recipe-button {
+      width: 100%;
+      border: none;
+      padding: 12px;
+      border-radius: 15px;
+      background: var(--teal);
+      color: white;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    /* ---------- IMPACT PAGE ---------- */
+
+    .impact-heading {
+      margin-bottom: 20px;
+    }
+
+    .impact-heading h1 {
+      font-size: 29px;
+      color: var(--ink-soft);
+      letter-spacing: -0.7px;
+      margin-bottom: 7px;
+    }
+
+    .impact-heading p {
+      font-size: 14px;
+      color: var(--muted-dim);
+      line-height: 1.5;
+    }
+
+    .impact-card {
+      background: var(--sand-pale);
+      border-radius: 23px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .impact-card h2 {
+      font-size: 16px;
+      color: #4a5f62;
+      margin-bottom: 14px;
+    }
+
+    .impact-stats {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 21px;
+      color: var(--ink-soft);
+      margin-bottom: 3px;
+    }
+
+    .stat span {
+      font-size: 10px;
+      color: #87938f;
+    }
+
+    .goal-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .goal-card h2 {
+      font-size: 15px;
+      color: #385463;
+      margin-bottom: 4px;
+    }
+
+    .goal-card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .goal-track {
+      height: 10px;
+      border-radius: 6px;
+      background: var(--teal-paler);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .goal-fill {
+      height: 100%;
+      width: 70%;
+      border-radius: 6px;
+      background: var(--teal);
+      transition: width 0.4s ease;
+    }
+
+    .goal-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted-dim);
+    }
+
+    /* ---------- BOTTOM NAV ---------- */
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 430px;
+      height: 76px;
+      background: rgba(253, 251, 246, 0.96);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-item {
+      border: none;
+      background: transparent;
+      color: #9aa5a7;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item span {
+      font-size: 21px;
+    }
+
+    .nav-item.active {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ---------- SETTINGS PANEL ---------- */
+
+    .settings-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(38, 55, 70, 0.32);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 50;
+    }
+
+    .settings-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .settings-panel {
+      width: 100%;
+      max-width: 430px;
+      max-height: 86vh;
+      background: var(--cream);
+      border-radius: 28px 28px 0 0;
+      padding: 10px 24px 28px;
+      overflow-y: auto;
+      transform: translateY(16px);
+      transition: transform 0.25s ease;
+    }
+
+    .settings-overlay.open .settings-panel {
+      transform: translateY(0);
+    }
+
+    .settings-grip {
+      width: 40px;
+      height: 4px;
+      border-radius: 3px;
+      background: var(--line);
+      margin: 10px auto 18px;
+    }
+
+    .settings-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      gap: 12px;
+    }
+
+    .settings-head h1 {
+      font-size: 22px;
+      color: var(--ink-soft);
+      letter-spacing: -0.4px;
+    }
+
+    .sync-status {
+      font-size: 11.5px;
+      color: var(--muted-dim);
+      margin-top: 4px;
+    }
+
+    .settings-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--sand-pale);
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .avatar-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .avatar-big {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #53616a;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar-big img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-controls h2 {
+      font-size: 15px;
+      color: #385463;
+      margin-bottom: 8px;
+    }
+
+    .avatar-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .avatar-buttons button {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 650;
+      padding: 8px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .avatar-buttons button:hover {
+      background: var(--teal-pale);
+      border-color: var(--teal-pale);
+    }
+
+    .avatar-swatches {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .swatch.selected {
+      border-color: var(--ink-soft);
+    }
+
+    .settings-section {
+      margin-bottom: 24px;
+    }
+
+    .settings-section h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted-dim);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 650;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: white;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .field input:focus, .field select:focus {
+      border-color: var(--teal);
+    }
+
+    .field.has-error input {
+      border-color: var(--danger);
+      animation: shake 0.3s ease;
+    }
+
+    .field-error-text {
+      font-size: 11px;
+      color: var(--danger);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field.has-error .field-error-text {
+      display: block;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    .password-row {
+      position: relative;
+    }
+
+    .password-row button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .transfer-hint {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .code-box {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: white;
+      font-size: 11.5px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      color: var(--ink);
+      resize: vertical;
+      outline: none;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+
+    .code-box:focus {
+      border-color: var(--teal);
+    }
+
+    .code-box[readonly] {
+      background: var(--sand-paler);
+      color: #5c6a64;
+    }
+
+    .transfer-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .transfer-buttons button {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 650;
+      padding: 9px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .transfer-buttons button:hover {
+      background: var(--teal-pale);
+      border-color: var(--teal-pale);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-text strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+    }
+
+    .toggle-text span {
+      font-size: 11.5px;
+      color: var(--muted-dim);
+    }
+
+    .switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-track {
+      position: absolute;
+      inset: 0;
+      background: #dfe3df;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .switch-track::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .switch input:checked + .switch-track {
+      background: var(--teal);
+    }
+
+    .switch input:checked + .switch-track::before {
+      transform: translateX(18px);
+    }
+
+    .save-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .save-button {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--teal);
+      color: white;
+      font-weight: 650;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .signout-button {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--danger);
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 650;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* ---------- TOAST ---------- */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 100px;
+      transform: translate(-50%, 12px);
+      background: var(--ink-soft);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      z-index: 70;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast.error {
+      background: var(--danger);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (min-width: 600px) {
+      body {
+        padding: 30px 0;
+      }
+
+      .app {
+        border-radius: 32px;
+        box-shadow: 0 15px 50px rgba(50, 70, 80, 0.12);
+        min-height: 850px;
+      }
+
+      .bottom-nav {
+        position: absolute;
+        border-radius: 0 0 32px 32px;
+      }
+
+      .settings-overlay {
+        align-items: center;
+      }
+
+      .settings-panel {
+        border-radius: 28px;
+        max-height: 80vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-leaf">🌱</div>
+        EcoBite
+      </div>
+
+      <div class="header-actions">
+        <button class="profile" id="headerAvatar" onclick="openSettings()" aria-label="Open profile and settings" title="Settings">
+          <span class="profile-inner" id="headerAvatarInner">E</span>
+          <span class="profile-badge" aria-hidden="true">⚙</span>
+        </button>
+      </div>
+    </header>
+
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="showPage('camera', this)">
+        Scan Food
+      </button>
+
+      <button class="tab" onclick="showPage('recipes', this)">
+        Recipes
+      </button>
+    </div>
+
+
+    <!-- CAMERA PAGE -->
+    <main id="camera" class="page active">
+
+      <div class="intro">
+        <h1>What's in your kitchen?</h1>
+        <p>
+          Scan a receipt or snap a photo of your fridge.
+          We'll help you use what you already have before it goes to waste.
+        </p>
+      </div>
+
+      <div class="camera-card">
+
+        <div class="camera-circle">
+          📷
+        </div>
+
+        <h2>Scan your groceries</h2>
+
+        <p>
+          Take a photo of your receipt
+          or food shelf
+        </p>
+
+        <button class="scan-button" onclick="fakeScan()">
+          Open Camera
+        </button>
+
+      </div>
+
+
+      <div class="section-title">
+        <h2>Use soon</h2>
+        <span>4 items</span>
+      </div>
+
+      <div class="food-row">
+
+        <div class="food">
+          <div class="food-icon">🥬</div>
+          <div class="food-name">Spinach</div>
+          <div class="food-expiry">Expires tomorrow</div>
+        </div>
+
+        <div class="food">
+          <div class="food-icon">🍓</div>
+          <div class="food-name">Strawberries</div>
+          <div class="food-expiry">2 days left</div>
+        </div>
+
+        <div class="food">
+          <div class="food-icon">🥑</div>
+          <div class="food-name">Avocado</div>
+          <div class="food-expiry">3 days left</div>
+        </div>
+
+        <div class="food">
+          <div class="food-icon">🍗</div>
+          <div class="food-name">Chicken</div>
+          <div class="food-expiry">3 days left</div>
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <!-- RECIPES PAGE -->
+    <main id="recipes" class="page">
+
+      <div class="recipe-heading">
+        <h1>Recipes to rescue</h1>
+
+        <p>
+          Meals built around the food you need to use first.
+        </p>
+      </div>
+
+
+      <div class="rescue-banner">
+
+        <div class="rescue-icon">⚠️</div>
+
+        <div>
+          <strong>4 ingredients need attention</strong>
+          <span>These recipes prioritize your most perishable food.</span>
+        </div>
+
+      </div>
+
+
+      <!-- RECIPE 1 -->
+
+      <div class="recipe-card">
+
+        <div class="recipe-image">
+          🥗
+        </div>
+
+        <div class="recipe-content">
+
+          <span class="recipe-tag">
+            RESCUES 3 INGREDIENTS
+          </span>
+
+          <h2>Strawberry Spinach Bowl</h2>
+
+          <p class="recipe-description">
+            A fresh, quick meal using the ingredients
+            that are closest to expiring.
+          </p>
+
+          <div class="ingredients">
+            <span class="ingredient">🥬 Spinach</span>
+            <span class="ingredient">🍓 Strawberries</span>
+            <span class="ingredient">🥑 Avocado</span>
+            <span class="ingredient">+ pantry staples</span>
+          </div>
+
+          <button class="recipe-button" onclick="showToast('Recipe started — enjoy cooking!')">
+            Start Cooking →
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- RECIPE 2 -->
+
+      <div class="recipe-card">
+
+        <div class="recipe-image">
+          🍝
+        </div>
+
+        <div class="recipe-content">
+
+          <span class="recipe-tag">
+            RESCUES 2 INGREDIENTS
+          </span>
+
+          <h2>Creamy Garden Pasta</h2>
+
+          <p class="recipe-description">
+            Comfort food that puts your leftover
+            vegetables to work.
+          </p>
+
+          <div class="ingredients">
+            <span class="ingredient">🥬 Spinach</span>
+            <span class="ingredient">🍅 Tomatoes</span>
+            <span class="ingredient">🍝 Pasta</span>
+          </div>
+
+          <button class="recipe-button" onclick="showToast('Recipe started — enjoy cooking!')">
+            Start Cooking →
+          </button>
+
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <!-- IMPACT PAGE -->
+    <main id="impact" class="page">
+
+      <div class="impact-heading">
+        <h1>Your impact</h1>
+        <p>A running total of what you've rescued so far.</p>
+      </div>
+
+      <div class="impact-card">
+        <h2>🌱 This month</h2>
+
+        <div class="impact-stats">
+          <div class="stat">
+            <strong>8.4 lb</strong>
+            <span>food rescued</span>
+          </div>
+
+          <div class="stat">
+            <strong>$24</strong>
+            <span>saved</span>
+          </div>
+
+          <div class="stat">
+            <strong>14</strong>
+            <span>meals made</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <h2>Monthly goal</h2>
+        <p>12 lb of food rescued before the month ends.</p>
+
+        <div class="goal-track">
+          <div class="goal-fill"></div>
+        </div>
+
+        <div class="goal-footer">
+          <span>8.4 lb rescued</span>
+          <span>70% of 12 lb</span>
+        </div>
+      </div>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+      <button
+        class="nav-item active"
+        onclick="showPage('camera', document.querySelectorAll('.tab')[0])"
+      >
+        <span>📷</span>
+        Scan
+      </button>
+
+      <button
+        class="nav-item"
+        onclick="showPage('recipes', document.querySelectorAll('.tab')[1])"
+      >
+        <span>🍽️</span>
+        Recipes
+      </button>
+
+      <button class="nav-item" onclick="showPage('impact', null)">
+        <span>🌱</span>
+        Impact
+      </button>
+
+    </nav>
+
+
+    <!-- SETTINGS OVERLAY -->
+    <div class="settings-overlay" id="settingsOverlay" onclick="closeOnBackdrop(event)">
+      <div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" onclick="event.stopPropagation()">
+
+        <div class="settings-grip"></div>
+
+        <div class="settings-head">
+          <div>
+            <h1 id="settingsTitle">Profile &amp; settings</h1>
+            <p class="sync-status" id="syncStatus">Checking where changes are saved…</p>
+          </div>
+          <button class="settings-close" onclick="closeSettings()" aria-label="Close settings">✕</button>
+        </div>
+
+        <div class="avatar-section">
+          <div class="avatar-big" id="settingsAvatar">E</div>
+
+          <div class="avatar-controls">
+            <h2>Profile photo</h2>
+            <div class="avatar-buttons">
+              <button onclick="document.getElementById('photoInput').click()">Upload photo</button>
+              <button onclick="removePhoto()">Remove</button>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)" />
+
+            <div class="avatar-swatches" id="swatchRow">
+              <!-- swatches injected by JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Account</h3>
+
+          <div class="field">
+            <label for="nameField">Display name</label>
+            <input type="text" id="nameField" value="Emma Castillo" oninput="syncAvatarInitial()" />
+          </div>
+
+          <div class="field" id="emailFieldWrap">
+            <label for="emailField">Email</label>
+            <input type="email" id="emailField" value="[email protected]" oninput="validateEmail()" />
+            <span class="field-error-text">Enter a valid email address, like name@example.com</span>
+          </div>
+
+          <div class="field">
+            <label for="passwordField">Password</label>
+            <div class="password-row">
+              <input type="password" id="passwordField" value="••••••••••" />
+              <button type="button" onclick="togglePassword()" id="passwordToggle" aria-label="Show password">Show</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Preferences</h3>
+
+          <div class="toggle-row">
+            <div class="toggle-text">
+              <strong>Push notifications</strong>
+              <span>Alerts when food is about to expire</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="notifPush" checked />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-text">
+              <strong>Weekly impact email</strong>
+              <span>A summary of what you rescued</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="notifWeekly" checked />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="field" style="margin-top: 14px;">
+            <label for="dietField">Dietary preference</label>
+            <select id="dietField">
+              <option>No restrictions</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-free</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Move to another device</h3>
+          <p class="transfer-hint">
+            Works even if you're signed out or in a private window — generate a code here, paste it on the other device.
+          </p>
+
+          <div class="field">
+            <label for="backupCodeOutput">Your backup code</label>
+            <textarea id="backupCodeOutput" class="code-box" rows="3" readonly placeholder="Tap “Generate code” to create one"></textarea>
+            <div class="transfer-buttons">
+              <button type="button" onclick="generateBackupCode()">Generate code</button>
+              <button type="button" onclick="copyBackupCode()">Copy</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="restoreCodeInput">Restore from a code</label>
+            <textarea id="restoreCodeInput" class="code-box" rows="3" placeholder="Paste a backup code here"></textarea>
+            <div class="transfer-buttons">
+              <button type="button" onclick="restoreFromBackupCode()">Restore this profile</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="save-row">
+          <button class="save-button" onclick="saveSettings()">Save changes</button>
+          <button class="signout-button" onclick="showToast('Signed out')">Sign out</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  </div>
+
+
+  <script>
+
+    const swatchColors = ['#e6d7bd', '#b8dce4', '#dcebed', '#c9d7c0', '#e8c8c3'];
+    let selectedSwatch = swatchColors[0];
+    let photoDataUrl = null;
+
+    function buildSwatches() {
+      const row = document.getElementById('swatchRow');
+      row.innerHTML = '';
+      swatchColors.forEach(color => {
+        const el = document.createElement('div');
+        el.className = 'swatch' + (color === selectedSwatch ? ' selected' : '');
+        el.style.background = color;
+        el.onclick = () => selectSwatch(color);
+        row.appendChild(el);
+      });
+    }
+
+    function selectSwatch(color) {
+      selectedSwatch = color;
+      photoDataUrl = null;
+      buildSwatches();
+      applyAvatarAppearance();
+    }
+
+    function applyAvatarAppearance() {
+      const headerInner = document.getElementById('headerAvatarInner');
+      const settingsAvatar = document.getElementById('settingsAvatar');
+      const initial = (document.getElementById('nameField').value.trim()[0] || 'E').toUpperCase();
+
+      [headerInner, settingsAvatar].forEach(el => {
+        if (photoDataUrl) {
+          el.style.background = 'transparent';
+          el.innerHTML = `<img src="${photoDataUrl}" alt="Profile photo" />`;
+        } else {
+          el.style.background = selectedSwatch;
+          el.innerHTML = initial;
+        }
+      });
+    }
+
+    function syncAvatarInitial() {
+      if (!photoDataUrl) applyAvatarAppearance();
+    }
+
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          // Downsize to a small square so the stored profile stays tiny
+          const size = 160;
+          const canvas = document.createElement('canvas');
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext('2d');
+
+          const scale = Math.max(size / img.width, size / img.height);
+          const w = img.width * scale;
+          const h = img.height * scale;
+          ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
+
+          photoDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          applyAvatarAppearance();
+          showToast('Photo updated');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removePhoto() {
+      photoDataUrl = null;
+      document.getElementById('photoInput').value = '';
+      applyAvatarAppearance();
+    }
+
+    function validateEmail() {
+      const field = document.getElementById('emailField');
+      const wrap = document.getElementById('emailFieldWrap');
+      const value = field.value.trim();
+      const looksValid = value.length === 0 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+      wrap.classList.toggle('has-error', !looksValid);
+      return looksValid;
+    }
+
+    function togglePassword() {
+      const field = document.getElementById('passwordField');
+      const btn = document.getElementById('passwordToggle');
+      const isHidden = field.type === 'password';
+      field.type = isHidden ? 'text' : 'password';
+      btn.innerText = isHidden ? 'Hide' : 'Show';
+      btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    }
+
+    let lastFocusedBeforeSettings = null;
+
+    function getFocusable(container) {
+      return Array.from(
+        container.querySelectorAll('button, input, select, [tabindex]:not([tabindex="-1"])')
+      ).filter(el => !el.disabled && el.offsetParent !== null);
+    }
+
+    function openSettings() {
+      lastFocusedBeforeSettings = document.activeElement;
+      document.getElementById('settingsOverlay').classList.add('open');
+
+      const panel = document.querySelector('.settings-panel');
+      const focusables = getFocusable(panel);
+      if (focusables.length) focusables[0].focus();
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsOverlay').classList.remove('open');
+      if (lastFocusedBeforeSettings) lastFocusedBeforeSettings.focus();
+    }
+
+    function closeOnBackdrop(event) {
+      if (event.target.id === 'settingsOverlay') closeSettings();
+    }
+
+    document.addEventListener('keydown', e => {
+      const overlay = document.getElementById('settingsOverlay');
+      if (!overlay.classList.contains('open')) return;
+
+      if (e.key === 'Escape') {
+        closeSettings();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const panel = document.querySelector('.settings-panel');
+        const focusables = getFocusable(panel);
+        if (!focusables.length) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    async function saveSettings() {
+      if (!validateEmail()) {
+        showToast('Fix the email address before saving', true);
+        document.getElementById('emailField').focus();
+        return;
+      }
+
+      applyAvatarAppearance();
+      const result = await persistProfile();
+      closeSettings();
+      showToast(result === 'synced' ? 'Settings saved to your account' : 'Settings saved on this device');
+    }
+
+    // ---------- PERSISTENCE ----------
+    // Tries the artifact's db capability (synced, tied to the viewer's
+    // identity) first; falls back to this browser's localStorage so the
+    // page still remembers things when db/user aren't available.
+
+    let dbCap = null;
+    let userCap = null;
+    let profileRef = null;
+    const LOCAL_KEY = 'ecobite-profile';
+
+    function setSyncStatus(text) {
+      const el = document.getElementById('syncStatus');
+      if (el) el.textContent = text;
+    }
+
+    function collectProfileData() {
+      return {
+        name: document.getElementById('nameField').value.trim(),
+        email: document.getElementById('emailField').value.trim(),
+        selectedSwatch,
+        photoDataUrl,
+        notifPush: document.getElementById('notifPush').checked,
+        notifWeekly: document.getElementById('notifWeekly').checked,
+        diet: document.getElementById('dietField').value,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    function applyProfileData(data) {
+      if (!data) return;
+
+      if (data.name) document.getElementById('nameField').value = data.name;
+      if (data.email) document.getElementById('emailField').value = data.email;
+      if (data.selectedSwatch) selectedSwatch = data.selectedSwatch;
+      if (data.photoDataUrl) photoDataUrl = data.photoDataUrl;
+      if (typeof data.notifPush === 'boolean') document.getElementById('notifPush').checked = data.notifPush;
+      if (typeof data.notifWeekly === 'boolean') document.getElementById('notifWeekly').checked = data.notifWeekly;
+      if (data.diet) document.getElementById('dietField').value = data.diet;
+
+      buildSwatches();
+      applyAvatarAppearance();
+    }
+
+    function loadFromLocalStorage() {
+      try {
+        const raw = localStorage.getItem(LOCAL_KEY);
+        if (raw) applyProfileData(JSON.parse(raw));
+      } catch (e) {
+        // Storage unavailable or corrupted — just keep the defaults
+      }
+    }
+
+    async function persistProfile() {
+      const data = collectProfileData();
+
+      if (profileRef) {
+        try {
+          await profileRef.set(data);
+          return 'synced';
+        } catch (e) {
+          // fall through to local fallback
+        }
+      }
+
+      try {
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(data));
+      } catch (e) {
+        // nothing more we can do — the session still has the in-memory values
+      }
+      return 'local';
+    }
+
+    async function initPersistence() {
+      try {
+        userCap = (typeof claude !== 'undefined') ? await claude.use('user') : null;
+        dbCap = (typeof claude !== 'undefined') ? await claude.use('db') : null;
+      } catch (e) {
+        userCap = null;
+        dbCap = null;
+      }
+
+      if (userCap && dbCap) {
+        let uid = null;
+        try {
+          uid = await userCap.id();
+        } catch (e) {
+          uid = null;
+        }
+
+        if (uid) {
+          profileRef = dbCap.doc('data/users/' + uid + '/profile');
+          setSyncStatus('Changes sync to your account');
+
+          try {
+            const snap = await profileRef.get();
+            if (snap.exists) applyProfileData(snap.data());
+          } catch (e) {
+            // no stored profile yet, or a transient read error — keep defaults
+          }
+          return;
+        }
+      }
+
+      setSyncStatus('Changes are saved on this device only');
+      loadFromLocalStorage();
+    }
+
+    initPersistence();
+
+    // ---------- PORTABLE BACKUP CODE ----------
+    // Works regardless of sign-in state: encodes the current profile as
+    // plain text the person copies themselves, so it moves between
+    // devices/sessions without depending on db or user identity at all.
+
+    function generateBackupCode() {
+      const data = collectProfileData();
+      let code;
+      try {
+        code = btoa(encodeURIComponent(JSON.stringify(data)));
+      } catch (e) {
+        showToast('Could not generate a code right now', true);
+        return;
+      }
+
+      const output = document.getElementById('backupCodeOutput');
+      output.value = code;
+      output.focus();
+      output.select();
+      showToast('Code generated — copy it now');
+    }
+
+    async function copyBackupCode() {
+      const output = document.getElementById('backupCodeOutput');
+      if (!output.value) {
+        showToast('Generate a code first', true);
+        return;
+      }
+
+      output.focus();
+      output.select();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(output.value);
+          showToast('Copied to clipboard');
+          return;
+        } catch (e) {
+          // fall through to the manual-selection fallback below
+        }
+      }
+
+      try {
+        if (document.execCommand && document.execCommand('copy')) {
+          showToast('Copied to clipboard');
+          return;
+        }
+      } catch (e) {
+        // fall through
+      }
+
+      showToast('Code selected — press Ctrl/Cmd+C to copy');
+    }
+
+    async function restoreFromBackupCode() {
+      const input = document.getElementById('restoreCodeInput');
+      const raw = input.value.trim();
+
+      if (!raw) {
+        showToast('Paste a backup code first', true);
+        return;
+      }
+
+      let data;
+      try {
+        data = JSON.parse(decodeURIComponent(atob(raw)));
+      } catch (e) {
+        showToast('That backup code looks invalid', true);
+        return;
+      }
+
+      applyProfileData(data);
+      const result = await persistProfile();
+      input.value = '';
+      showToast(result === 'synced' ? 'Profile restored and synced' : 'Profile restored on this device');
+    }
+
+    function showPage(pageId, clickedTab) {
+
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.getElementById(pageId).classList.add('active');
+
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      if (clickedTab) clickedTab.classList.add('active');
+
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      const navIndex = { camera: 0, recipes: 1, impact: 2 }[pageId];
+      const navButtons = document.querySelectorAll('.nav-item');
+      if (navButtons[navIndex]) navButtons[navIndex].classList.add('active');
+    }
+
+    function fakeScan() {
+      const button = document.querySelector('.scan-button');
+      button.innerText = 'Scanning...';
+
+      setTimeout(() => {
+        button.innerText = '✓ Food Added';
+        showToast('Added to your kitchen');
+
+        setTimeout(() => {
+          button.innerText = 'Open Camera';
+        }, 1800);
+      }, 1200);
+    }
+
+    let toastTimer = null;
+    function showToast(message, isError) {
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.classList.toggle('error', !!isError);
+      toast.classList.add('show');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    buildSwatches();
+    applyAvatarAppearance();
+
+  </script>
+
+</body>
+</html>
