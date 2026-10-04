@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="EcoBite icon">
+  <defs>
+    <clipPath id="icon-shape">
+      <rect width="512" height="512" rx="108"/>
+    </clipPath>
+    <g id="sprig">
+      <path d="M0 22C0 8 0-4 0-14" stroke="#3C763E" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+      <path d="M-0.5-4C-8-6-22-1-30-12C-22-20-8-16-0.5-8Z" fill="#63A64E"/>
+      <path d="M0.5-8C10-14 24-12 32-24C24-28 10-20 0.5-12Z" fill="#4A8A40"/>
+    </g>
+  </defs>
+  <g clip-path="url(#icon-shape)">
+    <rect width="512" height="512" fill="#F7F4EC"/>
+
+    <!-- Loose leaf -->
+    <g transform="translate(32 312) rotate(-22)">
+      <path d="M30 68C8 52 2 24 16 2C38 16 48 46 30 68Z" fill="#6B9E52"/>
+      <path d="M23 58C21 40 18 20 17 8" stroke="#4C7A3C" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- Golden seed -->
+    <g transform="translate(112 358) rotate(26)">
+      <path d="M22 2C7 16 4 42 22 64C40 42 43 16 22 2Z" fill="#C6A15A"/>
+      <ellipse cx="16" cy="26" rx="6.5" ry="12" fill="#E6C98A" opacity="0.55"/>
+      <path d="M22 8C17 3 15-2 22-6C29-2 27 3 22 8Z" fill="#7A5A30"/>
+    </g>
+
+    <!-- Dark teal seed packet -->
+    <g transform="translate(26 28)">
+      <rect width="190" height="258" rx="24" fill="#266E66"/>
+      <rect x="16" y="15" width="158" height="22" rx="7" fill="#4A9A8A"/>
+      <circle cx="95" cy="122" r="54" fill="#F4EFE4"/>
+      <g transform="translate(95 120) scale(1.28)">
+        <use href="#sprig"/>
+      </g>
+      <text x="95" y="204" text-anchor="middle" fill="#E6F3EF" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="0.7">CH-1026</text>
+    </g>
+
+    <!-- Stem leaf -->
+    <g transform="translate(348 34)">
+      <path d="M26 40C26 68 26 100 26 136" stroke="#345C46" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <path d="M26 4C8 16 4 42 26 62C48 42 44 16 26 4Z" fill="#3C684C"/>
+      <path d="M26 54C26 36 26 18 26 10" stroke="#2A4C3A" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- Tomato -->
+    <g transform="translate(286 104)">
+      <circle r="42" fill="#F07834"/>
+      <ellipse cx="-14" cy="-14" rx="13" ry="9" fill="#F6A56C" opacity="0.38"/>
+      <ellipse cy="-40" rx="7" ry="3.8" fill="#5A8A44"/>
+      <circle cy="-42" r="2.4" fill="#3E6834"/>
+    </g>
+
+    <!-- Light green seed packet, tilted the same way as the pattern -->
+    <g transform="translate(348 332) rotate(-14)">
+      <g transform="translate(-88 -120)">
+        <rect width="176" height="240" rx="24" fill="#93C25A"/>
+        <rect x="15" y="14" width="146" height="20" rx="7" fill="#C4DE86"/>
+        <text x="88" y="56" text-anchor="middle" fill="#F8FCF2" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">TASTE UP</text>
+        <circle cx="88" cy="132" r="48" fill="#F4EFE4"/>
+        <g transform="translate(88 130) scale(1.15)">
+          <use href="#sprig"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
