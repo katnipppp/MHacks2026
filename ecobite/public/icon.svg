@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="EcoBite">
+  <rect width="512" height="512" fill="#F6F2E8"/>
+  <defs>
+    <symbol id="book" overflow="visible">
+      <rect x="-84" y="-110" width="168" height="220" rx="18" fill="var(--cover)"/>
+      <circle cx="0" cy="-26" r="40" fill="#F7F4EC"/>
+      <g transform="translate(0,-28)">
+        <ellipse cx="-11" cy="-1" rx="16" ry="8" transform="rotate(-52 -11 -1)" fill="var(--sprout)"/>
+        <ellipse cx="12" cy="-3" rx="16" ry="8.2" transform="rotate(48 12 -3)" fill="var(--sprout-deep)"/>
+        <rect x="-2.3" y="4" width="4.6" height="18" rx="2.3" fill="var(--sprout-deep)"/>
+      </g>
+      <rect x="-50" y="28" width="100" height="8" rx="4" fill="var(--ink)"/>
+      <rect x="-37" y="44" width="74" height="8" rx="4" fill="var(--ink)"/>
+      <rect x="-24" y="60" width="48" height="8" rx="4" fill="var(--ink)"/>
+    </symbol>
+    <symbol id="berry" overflow="visible">
+      <ellipse cx="-14" cy="-16" rx="8" ry="13" transform="rotate(-40 -14 -16)" fill="#4E9240"/>
+      <ellipse cx="14" cy="-16" rx="8" ry="13" transform="rotate(40 14 -16)" fill="#3E8436"/>
+      <ellipse cx="-6" cy="-22" rx="6.5" ry="12" transform="rotate(-16 -6 -22)" fill="#67B050"/>
+      <ellipse cx="6" cy="-22" rx="6.5" ry="12" transform="rotate(16 6 -22)" fill="#5A9E46"/>
+      <ellipse cx="0" cy="-26" rx="7" ry="13" fill="#73B85C"/>
+      <path d="M0 34C19 31 30 16 30 1C30-12 20-22 11-21C16-28 7-33 0-27C-7-33-16-28-11-21C-20-22-30-12-30 1C-30 16-19 31 0 34Z" fill="#F27848"/>
+      <g fill="#F8D0B6">
+        <circle cx="-11" cy="-4" r="2.2"/>
+        <circle cx="5" cy="1" r="2"/>
+        <circle cx="-5" cy="12" r="1.9"/>
+        <circle cx="13" cy="10" r="1.8"/>
+        <circle cx="9" cy="-8" r="1.7"/>
+        <circle cx="-15" cy="9" r="1.6"/>
+        <circle cx="2" cy="22" r="1.6"/>
+      </g>
+    </symbol>
+    <symbol id="carrot" overflow="visible">
+      <ellipse cx="-8" cy="-36" rx="5.5" ry="15" transform="rotate(-24 -8 -36)" fill="#4E9240"/>
+      <ellipse cx="1" cy="-40" rx="6" ry="17" fill="#67B050"/>
+      <ellipse cx="10" cy="-34" rx="5" ry="14" transform="rotate(26 10 -34)" fill="#3E8436"/>
+      <path d="M0 44C16 30 19 8 14-20C11-32 6-38 0-38C-6-38-11-32-14-20C-19 8-16 30 0 44Z" fill="#C99558"/>
+    </symbol>
+    <symbol id="onion" overflow="visible">
+      <circle cx="0" cy="12" r="30" fill="#F09040"/>
+      <path d="M0-16V-38" stroke="#5A9E46" stroke-width="3.6" stroke-linecap="round"/>
+      <ellipse cx="-14" cy="-34" rx="14" ry="7" transform="rotate(-42 -14 -34)" fill="#67B050"/>
+      <ellipse cx="15" cy="-32" rx="14" ry="7" transform="rotate(40 15 -32)" fill="#4E9240"/>
+    </symbol>
+    <symbol id="leaf" overflow="visible">
+      <path d="M0 28C22 16 32 0 20-20C14-2 6 14 0 28Z" fill="#6AAD52"/>
+    </symbol>
+  </defs>
+
+  <use href="#leaf" transform="translate(52,58) rotate(-36) scale(1.15)"/>
+  <use href="#berry" transform="translate(252,70) scale(1.22)"/>
+  <use href="#leaf" transform="translate(462,78) rotate(32) scale(1)"/>
+
+  <use href="#book" style="--cover:#8BC56E;--ink:#4E8A3C;--sprout:#62B050;--sprout-deep:#3C8834" transform="translate(150,224) rotate(-10) scale(1.1)"/>
+  <use href="#book" style="--cover:#1E6C76;--ink:#C5E4E0;--sprout:#6BB85A;--sprout-deep:#3E8C3A" transform="translate(372,250) rotate(8) scale(1.1)"/>
+
+  <use href="#carrot" transform="translate(96,418) rotate(-24) scale(1.12)"/>
+  <use href="#onion" transform="translate(286,424) scale(1.18)"/>
+  <use href="#leaf" transform="translate(430,392) rotate(18) scale(1.15)"/>
+  <use href="#leaf" transform="translate(188,400) rotate(-12) scale(0.78)"/>
+</svg>

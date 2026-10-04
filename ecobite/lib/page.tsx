@@ -399,7 +399,7 @@ export default function Page() {
       {/* HEADER */}
       <header className="header">
         <div className="logo">
-          <div className="logo-leaf">🌱</div>
+          <img className="logo-mark" src="/icon.svg" alt="" />
           EcoBite
         </div>
 
@@ -778,7 +778,7 @@ export default function Page() {
         .app { max-width: 430px; min-height: 100vh; margin: 0 auto; background: var(--cream); position: relative; padding-bottom: 100px; }
         .header { padding: 28px 24px 18px; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 9px; font-size: 22px; font-weight: 750; color: var(--ink-soft); }
-        .logo-leaf { width: 30px; height: 30px; background: #b8dce4; border-radius: 18px 4px 18px 4px; transform: rotate(-25deg); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+        .logo-mark { width: 44px; height: 44px; border-radius: 13px; display: block; flex: none; box-shadow: 0 1px 2px rgba(38, 55, 70, 0.08), 0 0 0 1px rgba(38, 55, 70, 0.08); }
 
         .profile { width: 40px; height: 40px; border-radius: 50%; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; padding: 0; position: relative; }
         .profile-inner { width: 100%; height: 100%; border-radius: 50%; color: #53616a; font-weight: 700; font-size: 14px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px var(--cream); }
